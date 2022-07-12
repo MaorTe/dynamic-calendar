@@ -21,7 +21,7 @@ const Scheduler = () => {
    const [scheduleObj, setScheduleObj] = useState();
    const [events, setEvents] = useState([]);
    const [updateEvent, setUpdateEvent] = useState(null);
-
+   console.log(window.innerHeight);
    useEffect(() => {
       async function fetchData() {
          const eventsData = await client('/events');
@@ -80,7 +80,7 @@ const Scheduler = () => {
       <div className="calendar-container">
          <h2>Calendar</h2>
          <ScheduleComponent
-            height="650px"
+            height={window.innerHeight - 200}
             ref={(schedule) => setScheduleObj(schedule)}
             selectedDate={new Date(2021, 0, 10)}
             eventSettings={{ dataSource: events.map((item) => item) }}

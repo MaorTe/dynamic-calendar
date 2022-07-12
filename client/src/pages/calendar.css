@@ -1,6 +1,13 @@
 .calendar-container {
+   min-height: calc(100vh - 70px);
+   overflow: hidden;
+   margin: 0;
    padding: 0 0.5rem 0.5rem;
-   margin: 1rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin: 1.5rem;
    margin-top: 2rem;
    background-color: #ffffff;
    border-radius: 1.5rem;
@@ -11,10 +18,8 @@ h2:first-child {
    display: flex;
    justify-content: center;
    align-items: center;
+   margin: 5px 0;
 }
 
-@media screen and (max-width: 768px) {
-   .calendar-container {
-      padding: 1rem;
-   }
-}
+/* @media screen and (max-width: 768px) {
+} */

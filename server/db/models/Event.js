@@ -23,6 +23,9 @@ const eventSchema = new mongoose.Schema({
    CategoryColor: {
       type: String,
    },
+   Description: {
+      type: String,
+   },
 });
 
 module.exports = mongoose.model('Event', eventSchema);

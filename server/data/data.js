@@ -6,6 +6,7 @@ exports.scheduleData = [
       StartTime: '2021-01-10T04:00:00.000Z',
       EndTime: '2021-01-10T05:30:00.000Z',
       CategoryColor: '#1aaa55',
+      Description: 'Social',
    },
    {
       Id: 2,
@@ -14,6 +15,7 @@ exports.scheduleData = [
       StartTime: '2021-01-11T06:30:00.000Z',
       EndTime: '2021-01-11T08:30:00.000Z',
       CategoryColor: '#357cd2',
+      Description: 'Career',
    },
    {
       Id: 3,
@@ -22,6 +24,7 @@ exports.scheduleData = [
       StartTime: '2021-01-12T04:00:00.000Z',
       EndTime: '2021-01-12T05:30:00.000Z',
       CategoryColor: '#7fa900',
+      Description: 'Financial',
    },
    {
       Id: 4,
@@ -30,6 +33,7 @@ exports.scheduleData = [
       StartTime: '2021-01-13T07:30:00.000Z',
       EndTime: '2021-01-13T09:00:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Leisure',
    },
    {
       Id: 5,
@@ -38,7 +42,9 @@ exports.scheduleData = [
       StartTime: '2021-01-14T06:30:00.000Z',
       EndTime: '2021-01-14T08:30:00.000Z',
       CategoryColor: '#00bdae',
+      Description: 'Social',
    },
+
    {
       Id: 6,
       Subject: 'Mysteries of Bermuda Triangle',
@@ -46,7 +52,9 @@ exports.scheduleData = [
       StartTime: '2021-01-14T04:00:00.000Z',
       EndTime: '2021-01-14T05:30:00.000Z',
       CategoryColor: '#f57f17',
+      Description: 'Career',
    },
+
    {
       Id: 7,
       Subject: 'Glaciers and Snowflakes',
@@ -54,7 +62,9 @@ exports.scheduleData = [
       StartTime: '2021-01-15T05:30:00.000Z',
       EndTime: '2021-01-15T07:00:00.000Z',
       CategoryColor: '#1aaa55',
+      Description: 'Financial',
    },
+
    {
       Id: 8,
       Subject: 'Life on Mars',
@@ -62,7 +72,9 @@ exports.scheduleData = [
       StartTime: '2021-01-16T03:30:00.000Z',
       EndTime: '2021-01-16T04:30:00.000Z',
       CategoryColor: '#357cd2',
+      Description: 'Leisure',
    },
+
    {
       Id: 9,
       Subject: 'Alien Civilization',
@@ -70,7 +82,9 @@ exports.scheduleData = [
       StartTime: '2021-01-18T05:30:00.000Z',
       EndTime: '2021-01-18T07:30:00.000Z',
       CategoryColor: '#7fa900',
+      Description: 'Social',
    },
+
    {
       Id: 10,
       Subject: 'Wildlife Galleries',
@@ -78,7 +92,9 @@ exports.scheduleData = [
       StartTime: '2021-01-20T05:30:00.000Z',
       EndTime: '2021-01-20T07:30:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Career',
    },
+
    {
       Id: 11,
       Subject: 'Best Photography 2021',
@@ -86,7 +102,9 @@ exports.scheduleData = [
       StartTime: '2021-01-21T04:00:00.000Z',
       EndTime: '2021-01-21T05:30:00.000Z',
       CategoryColor: '#00bdae',
+      Description: 'Financial',
    },
+
    {
       Id: 12,
       Subject: 'Smarter Puppies',
@@ -94,7 +112,9 @@ exports.scheduleData = [
       StartTime: '2021-01-08T04:30:00.000Z',
       EndTime: '2021-01-08T06:00:00.000Z',
       CategoryColor: '#f57f17',
+      Description: 'Leisure',
    },
+
    {
       Id: 13,
       Subject: 'Myths of Andromeda Galaxy',
@@ -102,7 +122,9 @@ exports.scheduleData = [
       StartTime: '2021-01-06T05:00:00.000Z',
       EndTime: '2021-01-06T07:00:00.000Z',
       CategoryColor: '#1aaa55',
+      Description: 'Social',
    },
+
    {
       Id: 14,
       Subject: 'Aliens vs Humans',
@@ -110,7 +132,9 @@ exports.scheduleData = [
       StartTime: '2021-01-05T04:30:00.000Z',
       EndTime: '2021-01-05T06:00:00.000Z',
       CategoryColor: '#357cd2',
+      Description: 'Career',
    },
+
    {
       Id: 15,
       Subject: 'Facts of Humming Birds',
@@ -118,7 +142,9 @@ exports.scheduleData = [
       StartTime: '2021-01-19T04:00:00.000Z',
       EndTime: '2021-01-19T05:30:00.000Z',
       CategoryColor: '#7fa900',
+      Description: 'Financial',
    },
+
    {
       Id: 16,
       Subject: 'Sky Gazers',
@@ -126,7 +152,9 @@ exports.scheduleData = [
       StartTime: '2021-01-22T05:30:00.000Z',
       EndTime: '2021-01-22T07:30:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Leisure',
    },
+
    {
       Id: 17,
       Subject: 'The Cycle of Seasons',
@@ -134,7 +162,9 @@ exports.scheduleData = [
       StartTime: '2021-01-11T00:00:00.000Z',
       EndTime: '2021-01-11T02:00:00.000Z',
       CategoryColor: '#00bdae',
+      Description: 'Social',
    },
+
    {
       Id: 18,
       Subject: 'Space Galaxies and Planets',
@@ -142,7 +172,9 @@ exports.scheduleData = [
       StartTime: '2021-01-11T11:30:00.000Z',
       EndTime: '2021-01-11T13:00:00.000Z',
       CategoryColor: '#f57f17',
+      Description: 'Career',
    },
+
    {
       Id: 19,
       Subject: 'Lifecycle of Bumblebee',
@@ -150,7 +182,9 @@ exports.scheduleData = [
       StartTime: '2021-01-14T00:30:00.000Z',
       EndTime: '2021-01-14T02:00:00.000Z',
       CategoryColor: '#7fa900',
+      Description: 'Financial',
    },
+
    {
       Id: 20,
       Subject: 'Alien Civilization',
@@ -158,7 +192,9 @@ exports.scheduleData = [
       StartTime: '2021-01-14T10:30:00.000Z',
       EndTime: '2021-01-14T12:30:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Leisure',
    },
+
    {
       Id: 21,
       Subject: 'Alien Civilization',
@@ -166,7 +202,9 @@ exports.scheduleData = [
       StartTime: '2021-01-10T08:30:00.000Z',
       EndTime: '2021-01-10T10:30:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Social',
    },
+
    {
       Id: 22,
       Subject: 'The Cycle of Seasons',
@@ -174,7 +212,9 @@ exports.scheduleData = [
       StartTime: '2021-01-12T09:00:00.000Z',
       EndTime: '2021-01-12T10:30:00.000Z',
       CategoryColor: '#00bdae',
+      Description: 'Career',
    },
+
    {
       Id: 23,
       Subject: 'Sky Gazers',
@@ -182,7 +222,9 @@ exports.scheduleData = [
       StartTime: '2021-01-15T09:00:00.000Z',
       EndTime: '2021-01-15T10:30:00.000Z',
       CategoryColor: '#ea7a57',
+      Description: 'Financial',
    },
+
    {
       Id: 24,
       Subject: 'Facts of Humming Birds',
@@ -190,5 +232,6 @@ exports.scheduleData = [
       StartTime: '2021-01-16T07:00:00.000Z',
       EndTime: '2021-01-16T09:00:00.000Z',
       CategoryColor: '#7fa900',
+      Description: 'Leisure',
    },
 ];

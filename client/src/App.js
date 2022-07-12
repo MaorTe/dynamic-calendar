@@ -1,10 +1,8 @@
 import React from 'react';
 import Calendar from './pages/Calendar';
 import { registerLicense } from '@syncfusion/ej2-base';
-import './App.css';
 
-const licenseKey =
-   'ORg4AjUWIQA/Gnt2VVhiQlFadVlJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRdkJjUX5ZcXJURGddUkI=';
+const licenseKey = process.env.REACT_APP_SYNCFUSION_LICENSE;
 // Registering Syncfusion license key
 registerLicense(licenseKey);
 

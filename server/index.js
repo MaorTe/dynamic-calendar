@@ -24,30 +24,7 @@ app.get('/events', async function (req, res) {
    }
 });
 
-app.get('/users', async function (req, res) {
-   try {
-      if (Object.keys(req.query).length === 0) res.send(await User.find({}));
-      const { category, term } = req.query;
-      const filter = {};
-      filter[category] = { $regex: term, $options: 'i' };
-      return res.send(await User.find(filter));
-   } catch (e) {
-      return res.status(500).send();
-   }
-});
-
-// app.post('/users', async function (req, res) {
-//    try {
-//       const { user } = req.body;
-//       if (!userValidator(user)) return res.send({ msg: 'bad credentials' });
-//       const userDB = await new User(user).save();
-//       res.send({ msg: 'added new user', IP: userDB.IP });
-//    } catch (e) {
-//       res.status(500).send({ msg: 'there were some errors' });
-//    }
-// });
-
-app.post('/events/update', async function (req, res) {
+app.post('/event/update', async function (req, res) {
    try {
       const { Id, Subject, Location, StartTime, EndTime } = req.body;
 
@@ -58,6 +35,7 @@ app.post('/events/update', async function (req, res) {
       dbEvent[0].Location = Location;
       dbEvent[0].StartTime = StartTime;
       dbEvent[0].EndTime = EndTime;
+      // dbEvent[0].Description = Description;
       const updateEventInDB = await dbEvent[0].save();
 
       res.send({ updateEventInDB });
@@ -67,17 +45,17 @@ app.post('/events/update', async function (req, res) {
    }
 });
 
-app.post('/users/delete', async function (req, res) {
-   try {
-      const { ids } = req.body;
-      await User.deleteMany({
-         ID: { $in: ids },
-      });
-      res.send({ msg: 'deleted selected user/users' });
-   } catch (e) {
-      res.status(500).send();
-   }
-});
+// app.post('/event/delete', async function (req, res) {
+//    try {
+//       const { id } = req.body;
+//       await User.delete({
+//          Id: { $in: id },
+//       });
+//       res.send({ msg: 'deleted selected event' });
+//    } catch (e) {
+//       res.status(500).send();
+//    }
+// });
 
 app.listen(port, () => {
    console.log(`Listening on ${port}`);

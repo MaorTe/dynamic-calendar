@@ -43,7 +43,7 @@ const Scheduler = () => {
 
    useEffect(() => {
       const onDragStopUpdateEvent = async () => {
-         const a = await client('/events/update', { data: updateEvent });
+         const a = await client('/event/update', { data: updateEvent });
          console.log(a);
       };
       updateEvent && onDragStopUpdateEvent();
@@ -58,11 +58,11 @@ const Scheduler = () => {
    };
 
    // const onResizeStop = (e) => {
-   //    console.log('a');
    //    console.log(e.event.target.setAttribute('disabled', true));
    //    console.log(e.event.target.removeAttribute('aria-selected'));
    //    document.removeEventListener('click', onClick('a'));
    // };
+
    const onActionComplete = (args) => {
       if (args.requestType === 'eventCreated') {
          // This block is execute after an appointment create
@@ -75,6 +75,7 @@ const Scheduler = () => {
          // This block is execute after an appointment remove
       }
    };
+
    return (
       <div className="calendar-container">
          <h2>Calendar</h2>
@@ -84,10 +85,10 @@ const Scheduler = () => {
             selectedDate={new Date(2021, 0, 10)}
             eventSettings={{ dataSource: events.map((item) => item) }}
             dragStart={onDragStart}
+            actionComplete={onActionComplete}
             // dragStop={onDragOrResizeStop}
             // resizeStop={onDragOrResizeStop}
             // popupOpen={onActionComplete}
-            actionComplete={onActionComplete}
             // popupClose={onActionComplete}
          >
             <ViewsDirective>

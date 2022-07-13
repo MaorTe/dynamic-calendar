@@ -14,6 +14,7 @@ import {
 } from '@syncfusion/ej2-react-schedule';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { client } from '../utils/api-client';
+import { applyCategoryColor, setColorForDescription } from '../utils/schedulerUtills';
 
 const PropertyPane = (props) => <div>{props.children}</div>;
 
@@ -21,7 +22,9 @@ const Scheduler = () => {
    const [scheduleObj, setScheduleObj] = useState();
    const [events, setEvents] = useState([]);
    const [updateEvent, setUpdateEvent] = useState(null);
-   console.log(window.innerHeight);
+   const [categoryColor, setCategoryColor] = useState(false);
+
+   // fetch events
    useEffect(() => {
       async function fetchData() {
          const eventsData = await client('/events');
@@ -30,28 +33,48 @@ const Scheduler = () => {
       fetchData();
    }, [events.length]);
 
-   const onCalendarEventChanged = (data) => {
+   // add/update an event
+   useEffect(() => {
+      const onEventChange = async () => {
+         const a = await client('/event/update', { data: updateEvent });
+         console.log(a);
+         Object.keys(a)[0] === 'newEvent'
+            ? setEvents((prev) => [...prev, a])
+            : setCategoryColor(true);
+      };
+      updateEvent && onEventChange();
+   }, [updateEvent]);
+
+   // second fetch to render the color on the screen after an update to category
+   useEffect(() => {
+      async function fetchData() {
+         const eventsData = await client('/events');
+         setEvents(eventsData);
+      }
+      categoryColor && fetchData();
+      setCategoryColor(false);
+   }, [categoryColor]);
+
+   const onCalendarEventChanged = (data, isNewEvent = false) => {
       const updatedEvent = {
-         Id: data.Id,
+         Id: isNewEvent ? events.length + 1 : data.Id,
          Subject: data.Subject,
          Location: data.Location,
          StartTime: data.StartTime,
          EndTime: data.EndTime,
+         Description: data.Description,
+         CategoryColor: data.Description && setColorForDescription(data.Description),
       };
       setUpdateEvent(updatedEvent);
    };
 
-   useEffect(() => {
-      const onDragStopUpdateEvent = async () => {
-         const a = await client('/event/update', { data: updateEvent });
-         console.log(a);
-      };
-      updateEvent && onDragStopUpdateEvent();
-   }, [updateEvent]);
+   const onEventRendered = (args) => {
+      applyCategoryColor(args, scheduleObj.currentView);
+   };
 
    const change = (args) => {
       scheduleObj.selectedDate = args.value;
-      scheduleObj.dataBind();
+      // scheduleObj.dataBind();
    };
    const onDragStart = (e) => {
       e.navigation.enable = true;
@@ -66,6 +89,7 @@ const Scheduler = () => {
    const onActionComplete = (args) => {
       if (args.requestType === 'eventCreated') {
          // This block is execute after an appointment create
+         onCalendarEventChanged(args.data[0], true);
       }
       if (args.requestType === 'eventChanged' && args.name === 'actionComplete') {
          // This block is execute after an appointment change
@@ -83,18 +107,22 @@ const Scheduler = () => {
             height={window.innerHeight - 160}
             ref={(schedule) => setScheduleObj(schedule)}
             selectedDate={new Date(2021, 0, 10)}
-            eventSettings={{ dataSource: events.map((item) => item) }}
+            eventSettings={{
+               dataSource: (categoryColor || events.length) && events.map((item) => item),
+            }}
             dragStart={onDragStart}
             actionComplete={onActionComplete}
+            eventRendered={onEventRendered}
             // dragStop={onDragOrResizeStop}
             // resizeStop={onDragOrResizeStop}
             // popupOpen={onActionComplete}
             // popupClose={onActionComplete}
          >
             <ViewsDirective>
-               {['Day', 'Week', 'Month', 'Agenda'].map((item) => (
-                  <ViewDirective key={item} option={item} />
-               ))}
+               {events.length &&
+                  ['Day', 'Week', 'Month', 'Agenda'].map((item) => (
+                     <ViewDirective key={item} option={item} />
+                  ))}
             </ViewsDirective>
             <Inject services={[Day, Week, Month, Agenda, Resize, DragAndDrop]} />
          </ScheduleComponent>

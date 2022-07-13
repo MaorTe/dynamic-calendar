@@ -26,20 +26,26 @@ app.get('/events', async function (req, res) {
 
 app.post('/event/update', async function (req, res) {
    try {
-      const { Id, Subject, Location, StartTime, EndTime } = req.body;
+      const { Id, Subject, Location, StartTime, EndTime, Description, CategoryColor } = req.body;
 
       const dbEvent = await Event.find({
          Id: { $in: Id },
       });
-      dbEvent[0].Subject = Subject;
-      dbEvent[0].Location = Location;
-      dbEvent[0].StartTime = StartTime;
-      dbEvent[0].EndTime = EndTime;
-      // dbEvent[0].Description = Description;
-      const updateEventInDB = await dbEvent[0].save();
+      // add new event otherwise update existing event
+      if (!dbEvent.length) {
+         const newEvent = await Event(req.body).save();
+         res.send({ newEvent });
+      } else {
+         dbEvent[0].Subject = Subject;
+         dbEvent[0].Location = Location;
+         dbEvent[0].StartTime = StartTime;
+         dbEvent[0].EndTime = EndTime;
+         dbEvent[0].Description = Description;
+         dbEvent[0].CategoryColor = CategoryColor;
 
-      res.send({ updateEventInDB });
-      // res.send({ msg: 'event updated' });
+         const updateEventInDB = await dbEvent[0].save();
+         res.send({ updateEventInDB });
+      }
    } catch (e) {
       res.status(500).send();
    }

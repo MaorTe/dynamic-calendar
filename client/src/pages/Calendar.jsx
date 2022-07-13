@@ -17,7 +17,7 @@ import { client } from '../utils/api-client';
 import { applyCategoryColor, setColorForDescription } from '../utils/schedulerUtills';
 
 const PropertyPane = (props) => <div>{props.children}</div>;
-
+const screenWidth = window.innerWidth - 61;
 const Scheduler = () => {
    const [scheduleObj, setScheduleObj] = useState();
    const [events, setEvents] = useState([]);
@@ -105,7 +105,7 @@ const Scheduler = () => {
          <h2>Calendar</h2>
          <ScheduleComponent
             height={window.innerHeight - 160}
-            width={window.innerWidth - 61}
+            width={screenWidth}
             ref={(schedule) => setScheduleObj(schedule)}
             selectedDate={new Date(2021, 0, 10)}
             eventSettings={{

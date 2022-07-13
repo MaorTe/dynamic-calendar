@@ -105,6 +105,7 @@ const Scheduler = () => {
          <h2>Calendar</h2>
          <ScheduleComponent
             height={window.innerHeight - 160}
+            width={window.innerWidth - 61}
             ref={(schedule) => setScheduleObj(schedule)}
             selectedDate={new Date(2021, 0, 10)}
             eventSettings={{

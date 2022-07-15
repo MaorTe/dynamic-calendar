@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import React, { useEffect, useState } from 'react';
 import './calendar.css';
 import {
@@ -14,16 +15,20 @@ import {
 } from '@syncfusion/ej2-react-schedule';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { client } from '../utils/api-client';
-import { applyCategoryColor, setColorForDescription } from '../utils/schedulerUtills';
-
+import { applyCategoryColor, setColorForDescription } from './../utils/schedulerUtills';
+import { sendMsg } from '../hooks/useSocket';
 const PropertyPane = (props) => <div>{props.children}</div>;
 const screenWidth = window.innerWidth - 61;
+
+const socket = io.connect('http://localhost:3001');
+
 const Scheduler = () => {
    const [scheduleObj, setScheduleObj] = useState();
    const [events, setEvents] = useState([]);
    const [updateEvent, setUpdateEvent] = useState(null);
    const [categoryColor, setCategoryColor] = useState(false);
 
+   // --------------useEffects--------------
    // fetch events
    useEffect(() => {
       async function fetchData() {
@@ -37,10 +42,10 @@ const Scheduler = () => {
    useEffect(() => {
       const onEventChange = async () => {
          const a = await client('/event/update', { data: updateEvent });
-         console.log(a);
          Object.keys(a)[0] === 'newEvent'
             ? setEvents((prev) => [...prev, a])
             : setCategoryColor(true);
+         socket.emit('update_object', a);
       };
       updateEvent && onEventChange();
    }, [updateEvent]);
@@ -54,6 +59,11 @@ const Scheduler = () => {
       categoryColor && fetchData();
       setCategoryColor(false);
    }, [categoryColor]);
+
+   useEffect(() => {
+      socket.on('object_updated', (data) => setEvents(data));
+   }, [socket]);
+   // --------------useEffects--------------
 
    const onCalendarEventChanged = (data, isNewEvent = false) => {
       const updatedEvent = {

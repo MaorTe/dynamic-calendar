@@ -1,12 +1,14 @@
 const express = require('express');
-const cors = require('cors');
+const app = express();
 const path = require('path');
-const insertData = require('./data/insertDataToDb');
+const cors = require('cors');
 
 require('./db/mongoose');
 const Event = require('./db/models/Event');
+const insertData = require('./data/insertDataToDb');
 
-const app = express();
+const websocket = require('./ws/websocket');
+
 const port = process.env.PORT || 3002;
 
 app.use(express.json());
@@ -34,7 +36,8 @@ app.post('/event/update', async function (req, res) {
       // add new event otherwise update existing event
       if (!dbEvent.length) {
          const newEvent = await Event(req.body).save();
-         res.send({ newEvent });
+         // res.send({ newEvent });
+         res.status(200).send({ newEvent });
       } else {
          dbEvent[0].Subject = Subject;
          dbEvent[0].Location = Location;
@@ -44,7 +47,8 @@ app.post('/event/update', async function (req, res) {
          dbEvent[0].CategoryColor = CategoryColor;
 
          const updateEventInDB = await dbEvent[0].save();
-         res.send({ updateEventInDB });
+         res.status(200).send({ updateEventInDB });
+         // res.send({ updateEventInDB });
       }
    } catch (e) {
       res.status(500).send();
@@ -63,27 +67,12 @@ app.post('/event/update', async function (req, res) {
 //    }
 // });
 
-app.listen(port, () => {
-   console.log(`Listening on ${port}`);
-});
-
 //deploy to heroku
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('/*', (req, res) => {
    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-// WebSocket
-const { Server } = require('ws');
-const wss = new Server({ server: app });
-
-wss.on('connection', (ws) => {
-   console.log('Client connected');
-   ws.on('close', () => console.log('Client disconnected'));
+app.listen(port, () => {
+   console.log(`Listening on ${port}`);
 });
-
-setInterval(() => {
-   wss.clients.forEach((client) => {
-      client.send(new Date().toTimeString());
-   });
-}, 1000);

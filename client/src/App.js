@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Calendar from '../src/pages/Calendar';
 import { registerLicense } from '@syncfusion/ej2-base';
 

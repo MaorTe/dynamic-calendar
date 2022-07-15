@@ -1,3 +1,5 @@
+import io from 'socket.io-client';
+
 export const applyCategoryColor = (args, currentView) => {
    let categoryColor = args[0 || 'data'].CategoryColor;
 
@@ -25,4 +27,13 @@ export const setColorForDescription = (descTemp) => {
       leisure: '#f57f17',
    }[res[0]];
    return color || '';
+};
+
+export const getSocketConnection = () => {
+   let HOST = window.location.origin.replace(/^http/, 'ws');
+   if (HOST.includes('localhost')) {
+      HOST = HOST.slice(0, -1) + '1';
+   }
+   console.log(HOST);
+   return io.connect(HOST);
 };

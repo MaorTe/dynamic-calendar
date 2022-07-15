@@ -1,4 +1,3 @@
-import io from 'socket.io-client';
 import React, { useEffect, useState } from 'react';
 import './calendar.css';
 import {
@@ -15,12 +14,16 @@ import {
 } from '@syncfusion/ej2-react-schedule';
 import { DatePickerComponent } from '@syncfusion/ej2-react-calendars';
 import { client } from '../utils/api-client';
-import { applyCategoryColor, setColorForDescription } from './../utils/schedulerUtills';
-import { sendMsg } from '../hooks/useSocket';
+import {
+   applyCategoryColor,
+   setColorForDescription,
+   getSocketConnection,
+} from './../utils/schedulerUtills';
+
 const PropertyPane = (props) => <div>{props.children}</div>;
 const screenWidth = window.innerWidth - 61;
 
-const socket = io.connect('http://localhost:3001');
+const socket = getSocketConnection();
 
 const Scheduler = () => {
    const [scheduleObj, setScheduleObj] = useState();
@@ -60,9 +63,10 @@ const Scheduler = () => {
       setCategoryColor(false);
    }, [categoryColor]);
 
+   // update real-time for other users using sockets
    useEffect(() => {
       socket.on('object_updated', (data) => setEvents(data));
-   }, [socket]);
+   }, []);
    // --------------useEffects--------------
 
    const onCalendarEventChanged = (data, isNewEvent = false) => {

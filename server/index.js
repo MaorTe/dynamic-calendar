@@ -7,8 +7,6 @@ require('./db/mongoose');
 const Event = require('./db/models/Event');
 const insertData = require('./data/insertDataToDb');
 
-const websocket = require('./ws/websocket');
-
 const port = process.env.PORT || 3002;
 
 app.use(express.json());
@@ -16,6 +14,7 @@ app.use(cors());
 
 //insert data to db
 // insertData();
+const websocket = require('./ws/websocket');
 
 app.get('/events', async function (req, res) {
    try {

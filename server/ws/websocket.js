@@ -24,6 +24,7 @@ const io = new Server(server, {
          'wss://dynamic-calendar.herokuapp.com',
       ],
       methods: ['GET', 'POST'],
+      credentials: true,
    },
 });
 

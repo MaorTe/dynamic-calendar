@@ -36,6 +36,6 @@ export const getSocketConnection = () => {
       HOST = HOST.slice(0, -1) + '1';
       return io.connect(HOST);
    } else {
-      return io.connect('https://dynamic-calendar.herokuapp.com');
+      return io.connect('wss://dynamic-calendar.herokuapp.com');
    }
 };

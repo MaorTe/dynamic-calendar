@@ -35,7 +35,6 @@ app.post('/event/update', async function (req, res) {
       // add new event otherwise update existing event
       if (!dbEvent.length) {
          const newEvent = await Event(req.body).save();
-         // res.send({ newEvent });
          res.status(200).send({ newEvent });
       } else {
          dbEvent[0].Subject = Subject;
@@ -47,7 +46,6 @@ app.post('/event/update', async function (req, res) {
 
          const updateEventInDB = await dbEvent[0].save();
          res.status(200).send({ updateEventInDB });
-         // res.send({ updateEventInDB });
       }
    } catch (e) {
       res.status(500).send();
@@ -57,10 +55,10 @@ app.post('/event/update', async function (req, res) {
 // app.post('/event/delete', async function (req, res) {
 //    try {
 //       const { id } = req.body;
-//       await User.delete({
+//       await Event.delete({
 //          Id: { $in: id },
 //       });
-//       res.send({ msg: 'deleted selected event' });
+//       res.status(200).send({ msg: 'deleted selected event' });
 //    } catch (e) {
 //       res.status(500).send();
 //    }

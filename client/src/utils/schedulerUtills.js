@@ -31,11 +31,9 @@ export const setColorForDescription = (descTemp) => {
 
 export const getSocketConnection = () => {
    let HOST = window.location.origin.replace(/^http/, 'ws');
-   console.log(HOST);
    if (HOST.includes('localhost')) {
-      HOST = HOST.slice(0, -1) + '1';
       return io.connect(HOST);
    } else {
-      return io.connect('wss://dynamic-calendar.herokuapp.com');
+      return io();
    }
 };

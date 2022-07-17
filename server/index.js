@@ -14,7 +14,6 @@ app.use(cors());
 
 //insert data to db
 // insertData();
-const websocket = require('./ws/websocket');
 
 app.get('/events', async function (req, res) {
    try {
@@ -52,6 +51,7 @@ app.post('/event/update', async function (req, res) {
    }
 });
 
+// in case of delete event
 // app.post('/event/delete', async function (req, res) {
 //    try {
 //       const { id } = req.body;
@@ -70,6 +70,9 @@ app.get('/*', (req, res) => {
    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
    console.log(`Listening on ${port}`);
 });
+
+// run websocket
+require('./ws/websocket')(server);

@@ -31,6 +31,11 @@ const Scheduler = () => {
    const [updateEvent, setUpdateEvent] = useState(null);
    const [categoryColor, setCategoryColor] = useState(false);
 
+   const onEventChange = async () => {
+      const a = await client('/event/update', { data: updateEvent });
+      Object.keys(a)[0] === 'newEvent' ? setEvents((prev) => [...prev, a]) : setCategoryColor(true);
+      socket.emit('update_object', a);
+   };
    // --------------useEffects--------------
    // fetch events
    useEffect(() => {
@@ -43,13 +48,6 @@ const Scheduler = () => {
 
    // add/update an event
    useEffect(() => {
-      const onEventChange = async () => {
-         const a = await client('/event/update', { data: updateEvent });
-         Object.keys(a)[0] === 'newEvent'
-            ? setEvents((prev) => [...prev, a])
-            : setCategoryColor(true);
-         socket.emit('update_object', a);
-      };
       updateEvent && onEventChange();
    }, [updateEvent]);
 
@@ -66,7 +64,7 @@ const Scheduler = () => {
    // update real-time for other users using sockets
    useEffect(() => {
       socket.on('object_updated', (data) => setEvents(data));
-   }, []);
+   }, [onEventChange]);
    // --------------useEffects--------------
 
    const onCalendarEventChanged = (data, isNewEvent = false) => {
@@ -93,12 +91,6 @@ const Scheduler = () => {
    const onDragStart = (e) => {
       e.navigation.enable = true;
    };
-
-   // const onResizeStop = (e) => {
-   //    console.log(e.event.target.setAttribute('disabled', true));
-   //    console.log(e.event.target.removeAttribute('aria-selected'));
-   //    document.removeEventListener('click', onClick('a'));
-   // };
 
    const onActionComplete = (args) => {
       if (args.requestType === 'eventCreated') {
@@ -127,12 +119,7 @@ const Scheduler = () => {
             }}
             dragStart={onDragStart}
             actionComplete={onActionComplete}
-            eventRendered={onEventRendered}
-            // dragStop={onDragOrResizeStop}
-            // resizeStop={onDragOrResizeStop}
-            // popupOpen={onActionComplete}
-            // popupClose={onActionComplete}
-         >
+            eventRendered={onEventRendered}>
             <ViewsDirective>
                {events.length &&
                   ['Day', 'Week', 'Month', 'Agenda'].map((item) => (

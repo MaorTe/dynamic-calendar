@@ -9,20 +9,10 @@ require('../db/mongoose');
 const Event = require('../db/models/Event');
 
 const server = http.createServer(app);
+
 const io = new Server(server, {
    cors: {
-      origin: [
-         'http://localhost:3000',
-         'http://dynamic-calendar.herokuapp.com',
-         'https://dynamic-calendar.herokuapp.com',
-         'http://dynamic-calendar.herokuapp.com:3000',
-         'https://dynamic-calendar.herokuapp.com:3000',
-         'http://dynamic-calendar.herokuapp.com:3001',
-         'https://dynamic-calendar.herokuapp.com:3001',
-         'dynamic-calendar.herokuapp.com',
-         'ws://dynamic-calendar.herokuapp.com',
-         'wss://dynamic-calendar.herokuapp.com',
-      ],
+      origin: '*',
       methods: ['GET', 'POST'],
       credentials: true,
    },

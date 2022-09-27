@@ -7,6 +7,7 @@ if (process.env.NODE_ENV) {
    url = require('./atlas');
 }
 
+console.log(url);
 mongoose.connect(url, {
    useNewUrlParser: true,
    useUnifiedTopology: true,

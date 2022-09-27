@@ -32,7 +32,7 @@ const Scheduler = () => {
    const [categoryColor, setCategoryColor] = useState(false);
 
    const onEventChange = async () => {
-      const a = await client('/event/update', { data: updateEvent });
+      const a = await client('event/update', { data: updateEvent });
       Object.keys(a)[0] === 'newEvent' ? setEvents((prev) => [...prev, a]) : setCategoryColor(true);
       socket.emit('update_object', a);
    };
@@ -40,7 +40,7 @@ const Scheduler = () => {
    // fetch events
    useEffect(() => {
       async function fetchData() {
-         const eventsData = await client('/events');
+         const eventsData = await client('events');
          setEvents(eventsData);
       }
       fetchData();
@@ -54,7 +54,7 @@ const Scheduler = () => {
    // second fetch to render the color on the screen after an update to category
    useEffect(() => {
       async function fetchData() {
-         const eventsData = await client('/events');
+         const eventsData = await client('events');
          setEvents(eventsData);
       }
       categoryColor && fetchData();

@@ -31,9 +31,10 @@ export const setColorForDescription = (descTemp) => {
 
 export const getSocketConnection = () => {
    let HOST = window.location.origin.replace(/^http/, 'ws');
-   console.log(HOST.includes('onrender'));
-   if (HOST.includes('localhost') || HOST.includes('onrender')) {
+   if (HOST.includes('localhost')) {
       return io.connect(HOST);
+   } else if (HOST.includes('onrender')) {
+      return io.connect(process.env.REACT_APP_API_URL);
    } else {
       return io();
    }

@@ -1,6 +1,6 @@
 # dynamic-calendar
 
-<p>Fullstack MERN - Dynamic calendar heroku deployment.</p> <p>Features: drag&amp;drop, resize and real time updates using socket.io</p>
+<p>Fullstack MERN - Dynamic calendar render deployment.</p> <p>Features: drag&amp;drop, resize and real time updates using socket.io</p>
 <p>Write one of these words: Career, Social, Leisure, Financial and the event background will change</p>
 
 ![cal_home_page!](https://user-images.githubusercontent.com/60146116/202279490-73a7940d-4b72-4279-8687-037f16beef9e.PNG)
